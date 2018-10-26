@@ -8,7 +8,6 @@ from khayyam import JalaliDate as jd
 class PostAdmin(admin.ModelAdmin):
     list_display = ['title', 'slug', 'is_published', 'published', 'category', 'get_tags']
     prepopulated_fields = { "slug": ('title',)}
-    prepopulated_fields = { "slug": ('title',)}
     list_editable = ['category']
     list_filter = ['status', 'published_at', 'category__title']
     filter_horizontal = ['tag']
