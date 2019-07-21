@@ -1,0 +1,245 @@
+{% extends 'shared/master.html' %}
+{% load static %}
+{% block scripts %}
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="{% static 'assets/features/owl-carousel/js/owl.carousel.js' %}"></script>
+{% endblock %}
+{% block body %}
+<main>
+    <div class="banner_3">
+      <h1 class="heading-style-1">
+        اخبار
+      </h1>
+      <div class="location">
+        <a href="#">خانه</a>
+        <span>/</span>
+        <a href="#">خانه</a>
+        <span>/</span>
+        <a class="{% if view.page_name == 'boos' %}active{% endif %}" href="#">لیست</a>
+      </div>
+    </div>
+
+    <div class="bosses-words">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="border-box-2 overflow_hidden news-section specific-news landing-news box-1">
+              <div class="header-section">
+                <div class="row">
+                  <div class="col-md-4 col-6">
+                    <h3 class="heading-style-3">خبرنامه</h3>
+                  </div>
+                  <div class="col-md-8 col-6"></div>
+                </div>
+              </div>
+              <div class="row">
+                <div class=" border-box-2 no_border width-full">
+                  <div class="display-flex-r mx-0">
+                    <div class="profile-box">
+                      <img class="img-fluid news-image" src="{% static 'assets/img/thumb/profile.jpg'%}" alt="{{ post.slug}}">
+                    </div>
+                    <div class="news-content">
+                      <a class="title" href="#">{{ boss.title}}</a>
+                      <br>
+                      <span class="date">{{ boss.published_at}}</span>
+                      <p class="text">{{ boss.content}}</p>
+                      <a class="btn_2" href="#">بیشتر بخوانید</a>
+                      <hr class="hr-divider-1">
+                      <hr class="hr-divider-2">
+                      <div class="social">
+                        <div class="user-input seen-count">
+                          <i class="fa fa-eye" aria-hidden="true"></i>
+                          <span class="count">251</span>
+                        </div>
+                        <div class="user-input like liked">
+                          <button class="like liked" href="#" role="button">
+                            <i class="fa fa-heart-o" aria-hidden="true"></i>
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                          </button>
+                          <span class="count">251</span>
+                        </div>
+                      </div>
+                    </div> 
+                  </div>
+                </div>
+                <!-- <div class=" border-box-2 no_border width-full">
+                  <div class="display-flex-r mx-0">
+                    <div class="profile-box">
+                      <img class="img-fluid news-image" src="assets/img/thumb/profile.jpg" alt="">
+                    </div>
+                    <div class="news-content">
+                      <a class="title" href="#">لورم ایپسوم متن ساختگی با تولید سادگی</a>
+                      <br>
+                      <span class="date">نائب رئیس بانوان هیئت بدمینتون مازندران</span>
+                      <p class="text">بانوان بدمینتون باز مازندرانی نقش بسزایی در سطح کشور دارند.</p>
+                      <a class="btn_2" href="#">بیشتر بخوانید</a>
+                      <hr class="hr-divider-1">
+                      <hr class="hr-divider-2">
+                      <div class="social">
+                        <div class="user-input seen-count">
+                          <i class="fa fa-eye" aria-hidden="true"></i>
+                          <span class="count">251</span>
+                        </div>
+                        <div class="user-input like liked">
+                          <button class="like liked" href="#" role="button">
+                            <i class="fa fa-heart-o" aria-hidden="true"></i>
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                          </button>
+                          <span class="count">251</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class=" border-box-2 no_border width-full">
+                  <div class="display-flex-r mx-0">
+                    <div class="profile-box">
+                      <img class="img-fluid news-image" src="assets/img/thumb/profile.jpg" alt="">
+                    </div>
+                    <div class="news-content">
+                      <a class="title" href="#">لورم ایپسوم متن ساختگی با تولید سادگی</a>
+                      <br>
+                      <span class="date">نائب رئیس بانوان هیئت بدمینتون مازندران</span>
+                      <p class="text">بانوان بدمینتون باز مازندرانی نقش بسزایی در سطح کشور دارند.</p>
+                      <a class="btn_2" href="#">بیشتر بخوانید</a>
+                      <hr class="hr-divider-1">
+                      <hr class="hr-divider-2">
+                      <div class="social">
+                        <div class="user-input seen-count">
+                          <i class="fa fa-eye" aria-hidden="true"></i>
+                          <span class="count">251</span>
+                        </div>
+                        <div class="user-input like liked">
+                          <button class="like liked" href="#" role="button">
+                            <i class="fa fa-heart-o" aria-hidden="true"></i>
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                          </button>
+                          <span class="count">251</span>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class=" border-box-2 no_border width-full">
+                  <div class="display-flex-r mx-0">
+                    <div class="profile-box">
+                      <img class="img-fluid news-image" src="assets/img/thumb/profile.jpg" alt="">
+                    </div>
+                    <div class="news-content">
+                      <a class="title" href="#">لورم ایپسوم متن ساختگی با تولید سادگی</a>
+                      <br>
+                      <span class="date">نائب رئیس بانوان هیئت بدمینتون مازندران</span>
+                      <p class="text">بانوان بدمینتون باز مازندرانی نقش بسزایی در سطح کشور دارند.</p>
+                      <a class="btn_2" href="#">بیشتر بخوانید</a>
+                      <hr class="hr-divider-1">
+                      <hr class="hr-divider-2">
+                      <div class="social">
+                        <div class="user-input seen-count">
+                          <i class="fa fa-eye" aria-hidden="true"></i>
+                          <span class="count">251</span>
+                        </div>
+                        <div class="user-input like liked">
+                          <button class="like liked" href="#" role="button">
+                            <i class="fa fa-heart-o" aria-hidden="true"></i>
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                          </button>
+                          <span class="count">251</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+                <!--
+                <div class="col-md-6 mt-3">
+                <div class=" border-box-2">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <img class="img-fluid news-image" src="assets/img/thumb/profile.jpg" alt="">
+                    </div>
+                    <div class="col-md-12 news-content">
+                      <div class="row mx-0">
+                        <a class="title" href="#">لورم ایپسوم متن ساختگی با تولید سادگی</a>
+                        <br>
+                        <span class="date">۱۳۹۷ . بهمن ۲۴</span>
+                        <p class="text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با .هدف بهبود ابزارهای کاربردی میباشد
+                        </p>
+                        <a class="btn_2" href="#">بیشتر بخوانید</a>
+                        <hr class="hr-divider-1">
+                        <hr class="hr-divider-2">
+                        <div class="social">
+                          <div class="profile">
+                            <img src="assets/img/thumb/profile.jpg" alt="">
+                            <span class="name"></span>
+                          </div>
+                          <div class="user-input seen-count">
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                            <span class="count">251</span>
+                          </div>
+                          <div class="user-input like">
+                            <button class="like" href="#" role="button">
+                              <i class="fa fa-heart-o" aria-hidden="true"></i>
+                            </button>
+                            <span class="count">251</span>
+                          </div>
+                          <div class="user-input comment">
+                            <a class="comment" href="#" role="button">
+                              <i class="fa fa-comment-o" aria-hidden="true"></i>
+                            </a>
+                            <span class="count">251</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>-->
+                <!-- <div class=" border-box-2 no_border width-full">
+                  <div class="display-flex-r mx-0">
+                    <div class="profile-box">
+                      <img class="img-fluid news-image" src="assets/img/thumb/profile.jpg" alt="">
+                    </div>
+                    <div class="news-content">
+                      <a class="title" href="#">لورم ایپسوم متن ساختگی با تولید سادگی</a>
+                      <br>
+                      <span class="date">نائب رئیس بانوان هیئت بدمینتون مازندران</span>
+                      <p class="text">بانوان بدمینتون باز مازندرانی نقش بسزایی در سطح کشور دارند.</p>
+                      <a class="btn_2" href="#">بیشتر بخوانید</a>
+                      <hr class="hr-divider-1">
+                      <hr class="hr-divider-2">
+                      <div class="social">
+                        <div class="user-input seen-count">
+                          <i class="fa fa-eye" aria-hidden="true"></i>
+                          <span class="count">251</span>
+                        </div>
+                        <div class="user-input like liked">
+                          <button class="like liked" href="#" role="button">
+                            <i class="fa fa-heart-o" aria-hidden="true"></i>
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                          </button>
+                          <span class="count">251</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+                <div class="col-12 text-center p-3">
+                  <ul class="pagination">
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li><i class="fa fa-ellipsis-h mt-2" aria-hidden="true"></i></li>
+                    <li class="page-item"><a class="page-link" href="#">10</a></li>
+                    <li class="page-item"><a class="page-link" href="#">11</a></li>
+                    <li class="page-item"><a class="page-link" href="#">12</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</main>
+{% endblock %}

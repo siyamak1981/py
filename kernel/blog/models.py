@@ -6,9 +6,11 @@ from django.contrib.auth.models import User
 from painless.models import choices as options
 from painless.models.mixins import OrganizedMixin
 from painless.models.mixins import TimeStampedMixin
+from painless.models.managers import PostPublishedManager
 
 status = options.PostStatus(is_charfield = False)
 # Create your models here.
+
 class Tag(OrganizedMixin):
     class Meta:
         ordering = [ '-created' ]
@@ -23,8 +25,8 @@ class Category(OrganizedMixin):
         verbose_name = 'category'
         verbose_name_plural = 'categories'
     
+        
     def __str__(self):
-
         return self.title
 
 class Post(TimeStampedMixin):
@@ -46,6 +48,8 @@ class Post(TimeStampedMixin):
     published_at = models.DateTimeField(default=timezone.now())
     
 
+    objects = models.Manager()
+    condition = PostPublishedManager()
 
     class Meta:
         ordering = ['-published_at', 'title']
@@ -55,3 +59,39 @@ class Post(TimeStampedMixin):
 
     def __str__(self):
         return self.title
+
+# class Comment(TimeStampedModel):
+#     commented_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE)
+#     for_post = models.ForeignKey(Post, related_name='comments', on_delete = models.CASCADE)
+#     parent = models.ForeignKey("self", null = True, blank = True, on_delete = models.SET_NULL)
+#     content = models.TextField()
+#     status = models.PositiveSmallIntegerField(choices=opt_status.get_status(), default = opt_status.PUDBLISHED)
+
+#     class Meta:
+#         ordering = ['-created']
+#         verbose_name = 'comment'
+#         verbose_name_plural = 'comments'
+    
+    
+#     def __str__(self): 
+#         return self.for_post.title
+
+
+
+
+class Comment(TimeStampedMixin):
+    post = models.ForeignKey(Post, on_delete = models.CASCADE, related_name='comments')
+    title = models.CharField(max_length= 128, unique = True)
+    email = models.EmailField()
+    content = models.TextField()
+    active = models.BooleanField(default=True)
+    reply_to = models.ForeignKey('self',null=True, blank=True, on_delete=models.CASCADE, related_name='replies')
+
+    class Meta:
+        ordering = ('created',)
+        verbose_name = 'comment'
+        verbose_name_plural = 'comments'
+        get_latest_by = ['-created']
+
+    def __str__(self):
+        return 'Comment by {} on {}'.format(self.title, self.post) 

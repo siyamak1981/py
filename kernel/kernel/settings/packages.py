@@ -3,10 +3,13 @@
 # ############## #
 from .base import INSTALLED_APPS
 
-INSTALLED_APPS.append('blog')
+INSTALLED_APPS.append('blog',)
 
+INSTALLED_APPS.append('store',)
 
-
+INSTALLED_APPS.append('product',)
+INSTALLED_APPS.append('panel',)
+INSTALLED_APPS.append('ticketing',)
 # ############## #
 #    extensions  #
 # ############## #

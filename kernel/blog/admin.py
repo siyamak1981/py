@@ -1,16 +1,31 @@
 from django.contrib import admin
-from .models import Post
-from .models import Tag
-from .models import Category
+# from .models import Post
+# from .models import Comment
+# from .models import Tag
+# from .models import Category
+from . import models
+from painless.models.actions import PostableMixin
+from painless.models.actions import ExportMixin
 from khayyam import JalaliDate as jd
+class CommentInline(admin.StackedInline):
+    model = models.Comment
+    # max_num = 2
+    fields = [
+        ('email', 'title',),
+        ('reply_to', 'active'),
+        'content'
+    ]
+    
 # Register your models here.
-@admin.register(Post)
-class PostAdmin(admin.ModelAdmin):
+@admin.register(models.Post)
+class PostAdmin(admin.ModelAdmin, PostableMixin, ExportMixin):
     list_display = ['title', 'slug', 'is_published', 'published', 'category', 'get_tags']
     prepopulated_fields = { "slug": ('title',)}
     list_editable = ['category']
     list_filter = ['status', 'published_at', 'category__title']
     filter_horizontal = ['tag']
+    inlines = [CommentInline]
+    actions = ['make_published', 'make_draft', 'export_as_json', 'export_as_csv']
 #     # fields = (
 #     #     ('title', 'slug',),
 #     #     ('status', 'category', 'author',),
@@ -19,7 +34,7 @@ class PostAdmin(admin.ModelAdmin):
 #     #     'summary',
 #     #     'content',
 #     # )
-
+    
     fieldsets = [
         ('main', { 
             'fields': ( 
@@ -66,7 +81,7 @@ class PostAdmin(admin.ModelAdmin):
 
 
 
-@admin.register(Tag)
+@admin.register(models.Tag)
 class TagAdmin(admin.ModelAdmin):
     list_display = ['title', 'slug', 'created_at', 'updated_at']
     list_filter = ['created',]
@@ -82,15 +97,37 @@ class TagAdmin(admin.ModelAdmin):
     def updated_at(self, obj):
         return jd(obj.updated)
 
-@admin.register(Category)
+@admin.register(models.Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['title', 'slug', 'created', 'updated']
-    prepopulated_fields = { "slug": ('title',)}
-
+    list_display = ['title', 'slug', 'created_at', 'updated_at']
+    prepopulated_fields = { "slug": ('title',)}    
+    actions_on_bottom = True
     
-
+    def created_at(self, obj):
+        return jd(obj.created)
     
+    
+    def updated_at(self, obj):
+        return jd(obj.updated)
 
+@admin.register(models.Comment)
+class CommentAdmin(admin.ModelAdmin):
+    pass
+   
+    # list_display = ['title', 'created_at', 'updated_at']
+    # prepopulated_fields = { ('title',)}  
+    # search_fields = ('title', 'content')
+
+    # actions_on_bottom = True
+    
+    # def created_at(self, obj):
+    #     return jd(obj.created)
+     
+    
+    # def updated_at(self, obj):
+    #     return jd(obj.updated)
+    
+   
    
 
 
